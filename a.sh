@@ -2,7 +2,7 @@
 # Block ad serving and tracking system-wide even before a request is issued to them.
 
 SOURCE='https://raw.githubusercontent.com/EnergizedProtection/block/master/unified/formats/hosts'
-BACKUP='https://raw.github.com/MattiSG/adblock/master/hosts.default'
+BACKUP='https://raw.githubusercontent.com/manojpawarsj12/adblocker-linux-unix/master/hosts.default'
 TARGET='/etc/hosts'
 DOWNLOADED='/etc/hosts.blocklist'
 ORIGINAL='/etc/hosts.without-adblock'
