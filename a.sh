@@ -2,13 +2,13 @@
 # Block ad serving and tracking system-wide even before a request is issued to them.
 
 SOURCE='https://raw.githubusercontent.com/EnergizedProtection/block/master/unified/formats/hosts'
-BACKUP='https://raw.githubusercontent.com/manojpawarsj12/adblocker-linux-unix/master/hosts.default'
+BACKUP='https://raw.github.com/MattiSG/adblock/master/hosts.default'
 TARGET='/etc/hosts'
 DOWNLOADED='/etc/hosts.blocklist'
 ORIGINAL='/etc/hosts.without-adblock'
 
 
-# source: http://support.apple.com/kb/HT5343
+
 clear_dns_cache() {
 	if command -v sw_vers >/dev/null 2>&1
 	then
@@ -35,7 +35,14 @@ block() {
 	echo 'Hosts file updated'
 }
 
+unblock() {
+	
 
+	sudo rm "$TARGET" &&
+	sudo cp "$ORIGINAL" "$TARGET" &&
+	echo 'Hosts file restored' &&
+	sudo rm "$ORIGINAL"
+}
 
 stats() {
 	local count=$(grep '^0.0.0.0' "$TARGET" | wc -l | tr -d ' ')
@@ -43,11 +50,18 @@ stats() {
 	echo "$count domains currently blocked"
 }
 
-
-	
-	echo "Installing blocklist…" &&
-	status
-	block &&
+echo " adblocker by luffysan press 1 to block and 2 to unblock "
+read kek
+if kek==1
+then 
 	clear_dns_cache
-
+	stats
+	block
+elif kek==2
+then
+	unblock
+	exit
+else
+	echo "wrong nput try running script again"
+fi 
 
